@@ -117,3 +117,14 @@ The CLI keeps project detection and file generation dependency-free; `@clack/pro
 [`publish.yml`](.github/workflows/publish.yml) tests and publishes the package through npm Trusted Publishing whenever a package file is pushed to `main` and the version in `package.json` is not already on npm. It can also be run manually from GitHub Actions.
 
 To release a new version, bump `package.json` and push to `main`. npm versions are immutable, so pushes that keep an already-published version are validated and then skipped. The workflow uses GitHub's OIDC identity and does not require an `NPM_TOKEN` secret.
+
+Use the release script that matches the compatibility of the change:
+
+```sh
+pnpm run release:patch  # backwards-compatible fix: 0.1.1 → 0.1.2
+pnpm run release:minor  # backwards-compatible feature: 0.1.1 → 0.2.0
+pnpm run release:major  # breaking change: 0.1.1 → 1.0.0
+git push origin main --follow-tags
+```
+
+The release scripts run the package tests and checks, then create the version commit and Git tag locally. The explicit push starts the trusted GitHub workflow; publishing is never hidden inside a local lifecycle script.

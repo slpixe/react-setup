@@ -21,7 +21,11 @@
     "test": "node --test test/*.test.js",
     "test:coverage": "node --test --experimental-test-coverage test/*.test.js",
     "check": "node --check bin/react-setup.js && node --check src/cli.js",
-    "prepack": "npm run check && npm test"
+    "prepack": "npm run check && npm test",
+    "preversion": "pnpm test && pnpm run check && git diff --check",
+    "release:patch": "npm version patch",
+    "release:minor": "npm version minor",
+    "release:major": "npm version major"
   },
   "dependencies": {
     "@clack/prompts": "^1.8.1"
