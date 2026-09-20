@@ -103,6 +103,8 @@ fieldset::after { clear: both; content: ""; display: table; }
 .command-meta button:hover { background: var(--orange); border-color: var(--orange); }
 pre { margin: 0; overflow-x: auto; padding: 1rem 1.15rem 1.2rem; }
 code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .83rem; line-height: 1.6; }
+.command-block-wrap pre { overflow-x: visible; white-space: pre-wrap; }
+.command-block-wrap code { overflow-wrap: anywhere; }
 .quiet-note { color: var(--steel); font-size: .8rem; margin: 1.4rem 0 .7rem; }
 .manual-guide { margin-top: -.25rem; }
 .manual-step { display: grid; gap: 1rem; grid-template-columns: 2.4rem minmax(0, 1fr); padding: 0 0 2.6rem; position: relative; }

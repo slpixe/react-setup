@@ -218,7 +218,7 @@ async function confirm() {
 export async function run(argv = process.argv.slice(2)) {
   const options = parseArgs(argv)
   if (options.help) return console.log(HELP)
-  if (options.version) return console.log('0.1.0')
+  if (options.version) return console.log('0.1.1')
 
   const target = resolve(options.target)
   const analysis = analyzeProject(target)

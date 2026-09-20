@@ -81,7 +81,7 @@ const e2eCommand: Record<PackageManager, string> = {
 
 const devServerCommand: Record<PackageManager, string> = {
   npm: 'npm run dev -- --host 127.0.0.1',
-  pnpm: 'pnpm dev -- --host 127.0.0.1',
+  pnpm: 'pnpm run dev --host 127.0.0.1',
   yarn: 'yarn dev --host 127.0.0.1',
   bun: 'bun run dev -- --host 127.0.0.1',
 }
@@ -131,14 +131,16 @@ export function buildSkillPrompt(options: SetupOptions) {
 
   return [
     'Use the react-setup skill for this task.',
+    '',
     projectInstruction,
     runtimeInstruction,
     'Set up Vite, TypeScript, and stable React Compiler.',
     `Use ${options.domEnvironment} for Vitest with React Testing Library.`,
     browserInstruction,
     'Add the automatic Playwright fixture and make the example E2E spec import the extended test.',
+    '',
     'Install what is needed, run the relevant checks, and summarize the files you changed.',
-  ].join(' ')
+  ].join('\n')
 }
 
 export function buildTemplateCommands(options: SetupOptions) {

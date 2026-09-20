@@ -42,7 +42,7 @@ function Choice<T extends string>({
   )
 }
 
-function CommandBlock({ command, label }: { command: string; label: string }) {
+function CommandBlock({ command, label, wrap = false }: { command: string; label: string; wrap?: boolean }) {
   const [copied, setCopied] = useState(false)
 
   async function copy() {
@@ -52,7 +52,7 @@ function CommandBlock({ command, label }: { command: string; label: string }) {
   }
 
   return (
-    <div className="command-block">
+    <div className={`command-block${wrap ? ' command-block-wrap' : ''}`}>
       <div className="command-meta">
         <span>{label}</span>
         <button onClick={copy} type="button">{copied ? 'Copied' : 'Copy'}</button>
@@ -256,7 +256,7 @@ export function App() {
                   <CommandBlock command={skillCommands[0]} label="Discover" />
                   <CommandBlock command={skillCommands[1]} label="Install" />
                   <p className="quiet-note">Direct installation works as soon as the GitHub repository is public. Search indexing may follow later.</p>
-                  <CommandBlock command={skillPrompt} label="Prompt your agent — follows your choices" />
+                  <CommandBlock command={skillPrompt} label="Prompt your agent — follows your choices" wrap />
                 </>
               )}
 

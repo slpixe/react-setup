@@ -45,6 +45,7 @@ describe('command builder', () => {
     })
 
     expect(prompt).toContain('Use the react-setup skill')
+    expect(prompt).toContain('\n\nConfigure this existing React project')
     expect(prompt).toContain('existing React project in place')
     expect(prompt).toContain('Bun as the runtime and bun for dependency management')
     expect(prompt).toContain('Use happy-dom for Vitest')
@@ -69,6 +70,8 @@ describe('command builder', () => {
     expect(steps[3].snippets[0].code).toContain('pnpm exec playwright install webkit')
     expect(steps[3].snippets[1].code).toContain("devices['iPhone 15']")
     expect(steps[3].snippets[1].code).not.toContain("devices['Desktop Chrome']")
+    expect(steps[3].snippets[1].code).toContain("command: 'pnpm run dev --host 127.0.0.1'")
+    expect(steps[3].snippets[1].code).not.toContain('pnpm dev -- --host')
     expect(steps.every((step) => step.references.length > 0)).toBe(true)
   })
 })

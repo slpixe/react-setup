@@ -81,6 +81,9 @@ export function executableVersion(name) {
 }
 
 export function installCommand(packageManager) {
+  if (packageManager === 'pnpm') {
+    return ['pnpm', 'install', '--config.confirmModulesPurge=false']
+  }
   return [packageManager, 'install']
 }
 

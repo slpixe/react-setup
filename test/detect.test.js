@@ -4,7 +4,7 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
-import { browserInstallCommand, detectPackageManager, detectRuntime } from '../src/detect.js'
+import { browserInstallCommand, detectPackageManager, detectRuntime, installCommand } from '../src/detect.js'
 
 async function sandbox(run) {
   const directory = await mkdtemp(join(tmpdir(), 'react-setup-detect-'))
@@ -57,4 +57,12 @@ test('installs only browsers selected by the user', () => {
     browserInstallCommand('bun', ['mobile']),
     ['bunx', 'playwright', 'install', 'webkit'],
   )
+})
+
+test('allows pnpm installs to replace node_modules without a TTY', () => {
+  assert.deepEqual(
+    installCommand('pnpm'),
+    ['pnpm', 'install', '--config.confirmModulesPurge=false'],
+  )
+  assert.deepEqual(installCommand('npm'), ['npm', 'install'])
 })
