@@ -1,0 +1,4 @@
+interface:
+  display_name: "React Setup"
+  short_description: "Configure modern React apps and tests"
+  default_prompt: "Use $react-setup to configure this React project with Vite, React Compiler, Vitest, and Playwright."

@@ -1,0 +1,54 @@
+{
+  "name": "@slpixe/react-setup",
+  "version": "0.1.0",
+  "description": "Safely add a modern Vite, React Compiler, Vitest, Testing Library, and Playwright setup to new or existing projects.",
+  "type": "module",
+  "bin": {
+    "react-setup": "./bin/react-setup.js"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    "template",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "test:coverage": "node --test --experimental-test-coverage test/*.test.js",
+    "check": "node --check bin/react-setup.js && node --check src/cli.js",
+    "prepack": "npm run check && npm test"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.8.1"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "packageManager": "pnpm@11.24.0",
+  "keywords": [
+    "react",
+    "vite",
+    "vitest",
+    "playwright",
+    "react-compiler",
+    "testing-library"
+  ],
+  "author": "slpixe",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slpixe/react-setup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/slpixe/react-setup/issues"
+  },
+  "homepage": "https://github.com/slpixe/react-setup#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
