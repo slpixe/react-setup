@@ -1,6 +1,6 @@
 {
   "name": "@slpixe/react-setup",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Safely add a modern Vite, React Compiler, Vitest, Testing Library, and Playwright setup to new or existing projects.",
   "type": "module",
   "bin": {
