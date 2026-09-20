@@ -4,7 +4,7 @@
   "description": "Safely add a modern Vite, React Compiler, Vitest, Testing Library, and Playwright setup to new or existing projects.",
   "type": "module",
   "bin": {
-    "react-setup": "./bin/react-setup.js"
+    "react-setup": "bin/react-setup.js"
   },
   "exports": {
     ".": "./src/index.js"
