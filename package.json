@@ -23,9 +23,9 @@
     "check": "node --check bin/react-setup.js && node --check src/cli.js",
     "prepack": "npm run check && npm test",
     "preversion": "pnpm test && pnpm run check && git diff --check",
-    "release:patch": "npm version patch",
-    "release:minor": "npm version minor",
-    "release:major": "npm version major"
+    "release:patch": "pnpm version patch",
+    "release:minor": "pnpm version minor",
+    "release:major": "pnpm version major"
   },
   "dependencies": {
     "@clack/prompts": "^1.8.1"
