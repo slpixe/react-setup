@@ -9,25 +9,25 @@ Verified against primary documentation on 2026-09-20. This is the source materia
 
 ## 1. Create a Vite React TypeScript app
 
-Vite currently ships both `react-ts` and `react-compiler-ts` templates. For the shortest new-project route, use `react-compiler-ts`. To teach the pieces individually, start from `react-ts`, then apply the compiler step below. Vite accepts `.` instead of `my-app` to scaffold into the current directory. Source: [Vite: Scaffolding Your First Project](https://vite.dev/guide/#scaffolding-your-first-vite-project).
+Vite currently ships both `react-ts` and `react-compiler-ts` templates. The manual new-project route uses `react-compiler-ts` because React Compiler is part of this project's intended baseline. Use `react-ts` only when you deliberately want a starter without the compiler. Vite accepts `.` instead of `my-app` to scaffold into the current directory. Source: [Vite: Scaffolding Your First Project](https://vite.dev/guide/#scaffolding-your-first-vite-project).
 
 ```sh
 # npm
-npm create vite@latest my-app -- --template react-ts
+npm create vite@latest my-app -- --template react-compiler-ts
 
 # pnpm
-pnpm create vite my-app --template react-ts
+pnpm create vite my-app --template react-compiler-ts
 
 # Yarn
-yarn create vite my-app --template react-ts
+yarn create vite my-app --template react-compiler-ts
 
 # Bun
-bun create vite my-app --template react-ts
+bun create vite my-app --template react-compiler-ts
 ```
 
-For a new project with the compiler already represented by the Vite template, change `react-ts` to `react-compiler-ts`.
+## 2. Verify or add React Compiler
 
-## 2. Add React Compiler
+New projects created with `react-compiler-ts` already contain the packages and Vite configuration below. Do not install them again. Use this installation step only when adding React Compiler to an existing project.
 
 Install the compiler and the Vite/Babel bridge:
 
