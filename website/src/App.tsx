@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import {
   buildCliCommand,
+  buildManualSteps,
   buildTemplateCommands,
   skillCommands,
   type BrowserTarget,
@@ -9,7 +10,7 @@ import {
   type ProjectMode,
 } from './commands'
 
-type EntryPoint = 'template' | 'cli' | 'skill'
+type EntryPoint = 'template' | 'cli' | 'skill' | 'manual'
 
 const packageManagers: PackageManager[] = ['npm', 'pnpm', 'yarn', 'bun']
 
@@ -75,7 +76,8 @@ export function App() {
     browsers,
     mode,
     projectName,
-  }), [packageManager, domEnvironment, browsers, mode, projectName])
+    runtime,
+  }), [packageManager, domEnvironment, browsers, mode, projectName, runtime])
 
   function chooseMode(value: ProjectMode) {
     setMode(value)
@@ -92,6 +94,7 @@ export function App() {
 
   const templateCommands = buildTemplateCommands(options)
   const cliCommand = buildCliCommand(options)
+  const manualSteps = buildManualSteps(options)
 
   return (
     <div className="page-shell">
@@ -109,7 +112,7 @@ export function App() {
 
       <main id="top">
         <section className="hero">
-          <p className="hero-index">Template / CLI / skill / website</p>
+          <p className="hero-index">Template / CLI / AI skill / manual</p>
           <h1>One React setup.<br />Four ways in.</h1>
           <p className="hero-copy">
             Vite, TypeScript, React Compiler, Testing Library, and desktop plus mobile Playwright—without reconstructing the toolchain every time.
@@ -162,6 +165,9 @@ export function App() {
               {runtime === 'bun' && packageManager !== 'bun' && (
                 <p className="hint">The CLI will detect Bun while still using {packageManager} for dependencies.</p>
               )}
+              {runtime === 'bun' && (
+                <p className="hint">Playwright Test still uses a supported Node runtime, even when Bun manages the packages.</p>
+              )}
             </fieldset>
 
             <fieldset>
@@ -206,6 +212,7 @@ export function App() {
               >Template</button>
               <button aria-selected={entryPoint === 'cli'} onClick={() => setEntryPoint('cli')} role="tab" type="button">CLI</button>
               <button aria-selected={entryPoint === 'skill'} onClick={() => setEntryPoint('skill')} role="tab" type="button">AI skill</button>
+              <button aria-selected={entryPoint === 'manual'} onClick={() => setEntryPoint('manual')} role="tab" type="button">Manual</button>
             </div>
 
             <div className="sheet-body" role="tabpanel">
@@ -239,6 +246,31 @@ export function App() {
                   <p className="quiet-note">Direct installation works as soon as the GitHub repository is public. Search indexing may follow later.</p>
                 </>
               )}
+
+              {entryPoint === 'manual' && (
+                <div className="manual-guide">
+                  <p className="entry-explainer">Build the same setup by hand. Every command follows your choices on the left; every section links back to the project that owns the configuration.</p>
+                  {manualSteps.map((step, index) => (
+                    <section className="manual-step" key={step.title}>
+                      <span className="step-number" aria-hidden="true">{index + 1}</span>
+                      <div className="step-content">
+                        <h3>{step.title}</h3>
+                        <p>{step.description}</p>
+                        <div className="step-references" aria-label={`References for ${step.title}`}>
+                          {step.references.map((reference) => (
+                            <a href={reference.url} key={reference.url} rel="noreferrer" target="_blank">{reference.label}</a>
+                          ))}
+                        </div>
+                        <div className="step-snippets">
+                          {step.snippets.map((snippet) => (
+                            <CommandBlock command={snippet.code} key={`${step.title}-${snippet.label}`} label={snippet.label} />
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="sheet-footer">
@@ -253,7 +285,7 @@ export function App() {
           <article><strong>Template</strong><p>See every file up front and start clean.</p></article>
           <article><strong>CLI</strong><p>Detect, configure, and merge safely.</p></article>
           <article><strong>AI skill</strong><p>Give agents the decision process.</p></article>
-          <article><strong>Website</strong><p>Turn choices into an exact command.</p></article>
+          <article><strong>Manual</strong><p>Copy each layer separately, with its original documentation beside it.</p></article>
         </section>
       </main>
 

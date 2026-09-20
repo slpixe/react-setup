@@ -100,6 +100,17 @@ fieldset::after { clear: both; content: ""; display: table; }
 pre { margin: 0; overflow-x: auto; padding: 1rem 1.15rem 1.2rem; }
 code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .83rem; line-height: 1.6; }
 .quiet-note { color: var(--steel); font-size: .8rem; margin: 1.4rem 0 .7rem; }
+.manual-guide { margin-top: -.25rem; }
+.manual-step { display: grid; gap: 1rem; grid-template-columns: 2.4rem minmax(0, 1fr); padding: 0 0 2.6rem; position: relative; }
+.manual-step:not(:last-child)::before { background: var(--line); content: ""; left: 1.18rem; position: absolute; top: 2.5rem; bottom: 0; width: 1px; }
+.step-number { align-items: center; background: var(--orange); border: 1px solid var(--ink); color: #fff; display: flex; font-size: .78rem; font-weight: 800; height: 2.4rem; justify-content: center; position: relative; width: 2.4rem; z-index: 1; }
+.step-content { min-width: 0; padding-top: .25rem; }
+.step-content h3 { font-size: 1.18rem; letter-spacing: -.025em; margin: 0; }
+.step-content > p { color: var(--steel); font-size: .88rem; line-height: 1.55; margin: .55rem 0 .7rem; max-width: 48rem; }
+.step-references { display: flex; flex-wrap: wrap; gap: .45rem 1rem; margin-bottom: 1.15rem; }
+.step-references a { color: var(--cyan-dark); font-size: .76rem; font-weight: 700; text-underline-offset: .2rem; }
+.step-references a::after { content: " ↗"; }
+.step-snippets .command-block:last-child { margin-bottom: 0; }
 .sheet-footer { border-top: 1px solid var(--line); color: var(--steel); display: flex; flex-wrap: wrap; font-size: .72rem; gap: .7rem 1.5rem; padding-top: 1rem; }
 .sheet-footer span::before { color: var(--orange); content: "✓"; font-weight: 900; margin-right: .38rem; }
 
@@ -128,6 +139,10 @@ footer { border-top: 1px solid var(--ink); color: var(--steel); display: flex; f
   .choice-grid.four { grid-template-columns: repeat(2, 1fr); }
   .sheet-heading { align-items: flex-start; flex-direction: column; gap: 1rem; }
   .entry-tabs button { flex: 1; padding-inline: .45rem; }
+  .entry-tabs { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .manual-step { gap: .75rem; grid-template-columns: 2rem minmax(0, 1fr); }
+  .step-number { height: 2rem; width: 2rem; }
+  .manual-step:not(:last-child)::before { left: .98rem; top: 2rem; }
   .routes { grid-template-columns: 1fr; }
   .routes article, .routes article + article { border-right: 0; border-top: 1px solid var(--line); padding: 1.4rem 0; }
   footer { align-items: flex-start; flex-direction: column; gap: .5rem; }

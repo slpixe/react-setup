@@ -100,7 +100,7 @@ npx skills find react-setup --owner slpixe
 
 ## Website
 
-The interactive command builder lives in [`website/`](website/) and is designed for Cloudflare Pages at [react-setup.slpixe.com](https://react-setup.slpixe.com). It produces copyable commands for Node or Bun and npm, pnpm, Yarn, or Bun.
+The interactive setup bench lives in [`website/`](website/) and is designed for Cloudflare Pages at [react-setup.slpixe.com](https://react-setup.slpixe.com). It produces copyable commands for Node or Bun and npm, pnpm, Yarn, or Bun, and includes a complete manual path with individually copyable Vite, React Compiler, Vitest, Testing Library, and Playwright configuration. Every manual section links to its upstream documentation; the supporting source audit is in [`docs/manual-setup-research.md`](docs/manual-setup-research.md).
 
 ## Development
 
@@ -110,4 +110,4 @@ pnpm run check
 pnpm pack --dry-run
 ```
 
-The CLI deliberately has no runtime dependencies.
+The CLI keeps project detection and file generation dependency-free; `@clack/prompts` provides the interactive wizard.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildCliCommand, buildTemplateCommands, skillCommands } from './commands'
+import { buildCliCommand, buildManualSteps, buildTemplateCommands, skillCommands } from './commands'
 
 describe('command builder', () => {
   it('builds a pnpm command for an existing happy-dom project', () => {
@@ -9,6 +9,7 @@ describe('command builder', () => {
       browsers: ['desktop'],
       mode: 'existing',
       projectName: 'ignored',
+      runtime: 'node',
     })).toBe('pnpm dlx @slpixe/react-setup . --pm=pnpm --dom=happy-dom --browsers=desktop --yes')
   })
 
@@ -19,6 +20,7 @@ describe('command builder', () => {
       browsers: ['mobile'],
       mode: 'new',
       projectName: 'My App',
+      runtime: 'bun',
     })).toEqual([
       'bunx tiged slpixe/react-setup/template My-App',
       'cd My-App',
@@ -30,5 +32,25 @@ describe('command builder', () => {
   it('provides discovery and direct skill installation', () => {
     expect(skillCommands).toHaveLength(2)
     expect(skillCommands[1]).toContain('--skill react-setup')
+  })
+
+  it('builds a package-manager and environment aware manual', () => {
+    const steps = buildManualSteps({
+      packageManager: 'pnpm',
+      domEnvironment: 'happy-dom',
+      browsers: ['mobile'],
+      mode: 'new',
+      projectName: 'My App',
+      runtime: 'node',
+    })
+
+    expect(steps).toHaveLength(5)
+    expect(steps[0].snippets[0].code).toBe('pnpm create vite My-App --template react-ts')
+    expect(steps[2].snippets[0].code).toContain('happy-dom')
+    expect(steps[2].snippets[1].code).toContain("environment: 'happy-dom'")
+    expect(steps[3].snippets[0].code).toContain('pnpm exec playwright install webkit')
+    expect(steps[3].snippets[1].code).toContain("devices['iPhone 15']")
+    expect(steps[3].snippets[1].code).not.toContain("devices['Desktop Chrome']")
+    expect(steps.every((step) => step.references.length > 0)).toBe(true)
   })
 })
