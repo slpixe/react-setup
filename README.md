@@ -111,3 +111,9 @@ pnpm pack --dry-run
 ```
 
 The CLI keeps project detection and file generation dependency-free; `@clack/prompts` provides the interactive wizard.
+
+## Publishing
+
+[`publish.yml`](.github/workflows/publish.yml) tests and publishes the package through npm Trusted Publishing whenever a package file is pushed to `main` and the version in `package.json` is not already on npm. It can also be run manually from GitHub Actions.
+
+To release a new version, bump `package.json` and push to `main`. npm versions are immutable, so pushes that keep an already-published version are validated and then skipped. The workflow uses GitHub's OIDC identity and does not require an `NPM_TOKEN` secret.
