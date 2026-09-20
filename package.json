@@ -51,7 +51,7 @@
   "bugs": {
     "url": "https://github.com/slpixe/react-setup/issues"
   },
-  "homepage": "https://github.com/slpixe/react-setup#readme",
+  "homepage": "https://react-setup.slpixe.com",
   "publishConfig": {
     "access": "public"
   }
