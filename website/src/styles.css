@@ -80,6 +80,10 @@ fieldset::after { clear: both; content: ""; display: table; }
 .text-field span { color: var(--steel); display: block; font-size: .76rem; margin-bottom: .35rem; }
 .text-field input { background: transparent; border: 1px solid var(--line); color: var(--ink); padding: .78rem .9rem; width: 100%; }
 .hint { color: var(--steel); font-size: .76rem; line-height: 1.45; margin: .7rem 0 0; }
+.dom-guide { clear: both; display: grid; gap: .55rem; margin: .9rem 0 0; }
+.dom-guide div { display: grid; gap: .6rem; grid-template-columns: 4.7rem minmax(0, 1fr); }
+.dom-guide dt { color: var(--cyan-dark); font-size: .76rem; font-weight: 750; }
+.dom-guide dd { color: var(--steel); font-size: .76rem; line-height: 1.45; margin: 0; }
 .check-list { clear: both; display: grid; gap: .65rem; }
 .check-list label { align-items: center; cursor: pointer; display: flex; font-size: .88rem; gap: .7rem; }
 .check-list input { accent-color: var(--orange); height: 1.1rem; width: 1.1rem; }

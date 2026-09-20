@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildCliCommand, buildManualSteps, buildTemplateCommands, skillCommands } from './commands'
+import { buildCliCommand, buildManualSteps, buildSkillPrompt, buildTemplateCommands, skillCommands } from './commands'
 
 describe('command builder', () => {
   it('builds a pnpm command for an existing happy-dom project', () => {
@@ -32,6 +32,24 @@ describe('command builder', () => {
   it('provides discovery and direct skill installation', () => {
     expect(skillCommands).toHaveLength(2)
     expect(skillCommands[1]).toContain('--skill react-setup')
+  })
+
+  it('builds an AI prompt from the selected setup options', () => {
+    const prompt = buildSkillPrompt({
+      packageManager: 'bun',
+      domEnvironment: 'happy-dom',
+      browsers: ['desktop'],
+      mode: 'existing',
+      projectName: 'ignored',
+      runtime: 'bun',
+    })
+
+    expect(prompt).toContain('Use the react-setup skill')
+    expect(prompt).toContain('existing React project in place')
+    expect(prompt).toContain('Bun as the runtime and bun for dependency management')
+    expect(prompt).toContain('Use happy-dom for Vitest')
+    expect(prompt).toContain('desktop Chromium only')
+    expect(prompt).not.toContain('mobile WebKit')
   })
 
   it('builds a package-manager and environment aware manual', () => {

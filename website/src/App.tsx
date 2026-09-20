@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import {
   buildCliCommand,
   buildManualSteps,
+  buildSkillPrompt,
   buildTemplateCommands,
   skillCommands,
   type BrowserTarget,
@@ -94,6 +95,7 @@ export function App() {
 
   const templateCommands = buildTemplateCommands(options)
   const cliCommand = buildCliCommand(options)
+  const skillPrompt = buildSkillPrompt(options)
   const manualSteps = buildManualSteps(options)
 
   return (
@@ -176,6 +178,16 @@ export function App() {
                 <Choice checked={domEnvironment === 'jsdom'} label="jsdom" name="dom" onChange={setDomEnvironment} value="jsdom" />
                 <Choice checked={domEnvironment === 'happy-dom'} label="happy-dom" name="dom" onChange={setDomEnvironment} value="happy-dom" />
               </div>
+              <dl className="dom-guide">
+                <div>
+                  <dt>jsdom</dt>
+                  <dd>Compatibility-first and the safer default when your app or dependencies rely on more browser APIs.</dd>
+                </div>
+                <div>
+                  <dt>happy-dom</dt>
+                  <dd>Performance-first and often quicker for DOM tests; keep Playwright for behavior that needs a real browser.</dd>
+                </div>
+              </dl>
             </fieldset>
 
             <fieldset>
@@ -244,6 +256,7 @@ export function App() {
                   <CommandBlock command={skillCommands[0]} label="Discover" />
                   <CommandBlock command={skillCommands[1]} label="Install" />
                   <p className="quiet-note">Direct installation works as soon as the GitHub repository is public. Search indexing may follow later.</p>
+                  <CommandBlock command={skillPrompt} label="Prompt your agent — follows your choices" />
                 </>
               )}
 

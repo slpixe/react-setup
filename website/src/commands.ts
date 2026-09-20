@@ -116,6 +116,31 @@ export function buildCliCommand(options: SetupOptions) {
   ].join(' ')
 }
 
+export function buildSkillPrompt(options: SetupOptions) {
+  const projectInstruction = options.mode === 'new'
+    ? `Create a new React project in ./${normalizedProjectName(options.projectName)}.`
+    : 'Configure this existing React project in place, preserving its current application code and conventions.'
+  const runtimeInstruction = options.runtime === 'bun'
+    ? `Use Bun as the runtime and ${options.packageManager} for dependency management.`
+    : `Use Node.js with ${options.packageManager} for dependency management.`
+  const browserInstruction = options.browsers.length === 2
+    ? 'Configure Playwright projects for desktop Chromium and mobile WebKit using the iPhone 15 device profile.'
+    : options.browsers.includes('desktop')
+      ? 'Configure a Playwright project for desktop Chromium only.'
+      : 'Configure a Playwright project for mobile WebKit using the iPhone 15 device profile only.'
+
+  return [
+    'Use the react-setup skill for this task.',
+    projectInstruction,
+    runtimeInstruction,
+    'Set up Vite, TypeScript, and stable React Compiler.',
+    `Use ${options.domEnvironment} for Vitest with React Testing Library.`,
+    browserInstruction,
+    'Add the automatic Playwright fixture and make the example E2E spec import the extended test.',
+    'Install what is needed, run the relevant checks, and summarize the files you changed.',
+  ].join(' ')
+}
+
 export function buildTemplateCommands(options: SetupOptions) {
   const name = normalizedProjectName(options.projectName)
   return [
